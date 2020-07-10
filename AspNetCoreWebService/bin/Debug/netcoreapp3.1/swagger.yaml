@@ -1,0 +1,411 @@
+Info:
+  Title: Test API
+  Description: ASP.NET Core Web API
+  Version: v1
+  TermsOfService: 
+  Contact: 
+  License: 
+  Extensions: {}
+Servers: []
+Paths:
+  /User:
+    Summary: 
+    Description: 
+    Operations:
+      Get:
+        Tags:
+        - Name: User
+          Description: 
+          ExternalDocs: 
+          Extensions: {}
+          UnresolvedReference: false
+          Reference: 
+        Summary: 
+        Description: 
+        ExternalDocs: 
+        OperationId: 
+        Parameters: []
+        RequestBody: 
+        Responses:
+          200:
+            Description: Success
+            Headers: {}
+            Content:
+              text/plain:
+                Schema:
+                  Title: 
+                  Type: array
+                  Format: 
+                  Description: 
+                  Maximum: 
+                  ExclusiveMaximum: 
+                  Minimum: 
+                  ExclusiveMinimum: 
+                  MaxLength: 
+                  MinLength: 
+                  Pattern: 
+                  MultipleOf: 
+                  Default: 
+                  ReadOnly: false
+                  WriteOnly: false
+                  AllOf: []
+                  OneOf: []
+                  AnyOf: []
+                  Not: 
+                  Required: []
+                  Items:
+                    Title: 
+                    Type: 
+                    Format: 
+                    Description: 
+                    Maximum: 
+                    ExclusiveMaximum: 
+                    Minimum: 
+                    ExclusiveMinimum: 
+                    MaxLength: 
+                    MinLength: 
+                    Pattern: 
+                    MultipleOf: 
+                    Default: 
+                    ReadOnly: false
+                    WriteOnly: false
+                    AllOf: []
+                    OneOf: []
+                    AnyOf: []
+                    Not: 
+                    Required: []
+                    Items: 
+                    MaxItems: 
+                    MinItems: 
+                    UniqueItems: 
+                    Properties: {}
+                    MaxProperties: 
+                    MinProperties: 
+                    AdditionalPropertiesAllowed: true
+                    AdditionalProperties: 
+                    Discriminator: 
+                    Example: 
+                    Enum: []
+                    Nullable: false
+                    ExternalDocs: 
+                    Deprecated: false
+                    Xml: 
+                    Extensions: {}
+                    UnresolvedReference: false
+                    Reference:
+                      ExternalResource: 
+                      Type: Schema
+                      Id: User
+                      IsExternal: false
+                      IsLocal: true
+                      ReferenceV3: '#/components/schemas/User'
+                      ReferenceV2: '#/definitions/User'
+                  MaxItems: 
+                  MinItems: 
+                  UniqueItems: 
+                  Properties: {}
+                  MaxProperties: 
+                  MinProperties: 
+                  AdditionalPropertiesAllowed: true
+                  AdditionalProperties: 
+                  Discriminator: 
+                  Example: 
+                  Enum: []
+                  Nullable: false
+                  ExternalDocs: 
+                  Deprecated: false
+                  Xml: 
+                  Extensions: {}
+                  UnresolvedReference: false
+                  Reference: 
+                Example: 
+                Examples: {}
+                Encoding: {}
+                Extensions: {}
+              application/json:
+                Schema:
+                  Title: 
+                  Type: array
+                  Format: 
+                  Description: 
+                  Maximum: 
+                  ExclusiveMaximum: 
+                  Minimum: 
+                  ExclusiveMinimum: 
+                  MaxLength: 
+                  MinLength: 
+                  Pattern: 
+                  MultipleOf: 
+                  Default: 
+                  ReadOnly: false
+                  WriteOnly: false
+                  AllOf: []
+                  OneOf: []
+                  AnyOf: []
+                  Not: 
+                  Required: []
+                  Items:
+                    Title: 
+                    Type: 
+                    Format: 
+                    Description: 
+                    Maximum: 
+                    ExclusiveMaximum: 
+                    Minimum: 
+                    ExclusiveMinimum: 
+                    MaxLength: 
+                    MinLength: 
+                    Pattern: 
+                    MultipleOf: 
+                    Default: 
+                    ReadOnly: false
+                    WriteOnly: false
+                    AllOf: []
+                    OneOf: []
+                    AnyOf: []
+                    Not: 
+                    Required: []
+                    Items: 
+                    MaxItems: 
+                    MinItems: 
+                    UniqueItems: 
+                    Properties: {}
+                    MaxProperties: 
+                    MinProperties: 
+                    AdditionalPropertiesAllowed: true
+                    AdditionalProperties: 
+                    Discriminator: 
+                    Example: 
+                    Enum: []
+                    Nullable: false
+                    ExternalDocs: 
+                    Deprecated: false
+                    Xml: 
+                    Extensions: {}
+                    UnresolvedReference: false
+                    Reference:
+                      ExternalResource: 
+                      Type: Schema
+                      Id: User
+                      IsExternal: false
+                      IsLocal: true
+                      ReferenceV3: '#/components/schemas/User'
+                      ReferenceV2: '#/definitions/User'
+                  MaxItems: 
+                  MinItems: 
+                  UniqueItems: 
+                  Properties: {}
+                  MaxProperties: 
+                  MinProperties: 
+                  AdditionalPropertiesAllowed: true
+                  AdditionalProperties: 
+                  Discriminator: 
+                  Example: 
+                  Enum: []
+                  Nullable: false
+                  ExternalDocs: 
+                  Deprecated: false
+                  Xml: 
+                  Extensions: {}
+                  UnresolvedReference: false
+                  Reference: 
+                Example: 
+                Examples: {}
+                Encoding: {}
+                Extensions: {}
+              text/json:
+                Schema:
+                  Title: 
+                  Type: array
+                  Format: 
+                  Description: 
+                  Maximum: 
+                  ExclusiveMaximum: 
+                  Minimum: 
+                  ExclusiveMinimum: 
+                  MaxLength: 
+                  MinLength: 
+                  Pattern: 
+                  MultipleOf: 
+                  Default: 
+                  ReadOnly: false
+                  WriteOnly: false
+                  AllOf: []
+                  OneOf: []
+                  AnyOf: []
+                  Not: 
+                  Required: []
+                  Items:
+                    Title: 
+                    Type: 
+                    Format: 
+                    Description: 
+                    Maximum: 
+                    ExclusiveMaximum: 
+                    Minimum: 
+                    ExclusiveMinimum: 
+                    MaxLength: 
+                    MinLength: 
+                    Pattern: 
+                    MultipleOf: 
+                    Default: 
+                    ReadOnly: false
+                    WriteOnly: false
+                    AllOf: []
+                    OneOf: []
+                    AnyOf: []
+                    Not: 
+                    Required: []
+                    Items: 
+                    MaxItems: 
+                    MinItems: 
+                    UniqueItems: 
+                    Properties: {}
+                    MaxProperties: 
+                    MinProperties: 
+                    AdditionalPropertiesAllowed: true
+                    AdditionalProperties: 
+                    Discriminator: 
+                    Example: 
+                    Enum: []
+                    Nullable: false
+                    ExternalDocs: 
+                    Deprecated: false
+                    Xml: 
+                    Extensions: {}
+                    UnresolvedReference: false
+                    Reference:
+                      ExternalResource: 
+                      Type: Schema
+                      Id: User
+                      IsExternal: false
+                      IsLocal: true
+                      ReferenceV3: '#/components/schemas/User'
+                      ReferenceV2: '#/definitions/User'
+                  MaxItems: 
+                  MinItems: 
+                  UniqueItems: 
+                  Properties: {}
+                  MaxProperties: 
+                  MinProperties: 
+                  AdditionalPropertiesAllowed: true
+                  AdditionalProperties: 
+                  Discriminator: 
+                  Example: 
+                  Enum: []
+                  Nullable: false
+                  ExternalDocs: 
+                  Deprecated: false
+                  Xml: 
+                  Extensions: {}
+                  UnresolvedReference: false
+                  Reference: 
+                Example: 
+                Examples: {}
+                Encoding: {}
+                Extensions: {}
+            Links: {}
+            Extensions: {}
+            UnresolvedReference: false
+            Reference: 
+        Callbacks: {}
+        Deprecated: false
+        Security: []
+        Servers: []
+        Extensions: {}
+    Servers: []
+    Parameters: []
+    Extensions: {}
+Components:
+  Schemas:
+    User:
+      Title: 
+      Type: object
+      Format: 
+      Description: 
+      Maximum: 
+      ExclusiveMaximum: 
+      Minimum: 
+      ExclusiveMinimum: 
+      MaxLength: 
+      MinLength: 
+      Pattern: 
+      MultipleOf: 
+      Default: 
+      ReadOnly: false
+      WriteOnly: false
+      AllOf: []
+      OneOf: []
+      AnyOf: []
+      Not: 
+      Required: []
+      Items: 
+      MaxItems: 
+      MinItems: 
+      UniqueItems: 
+      Properties:
+        id:
+          Title: 
+          Type: integer
+          Format: int32
+          Description: 
+          Maximum: 
+          ExclusiveMaximum: 
+          Minimum: 
+          ExclusiveMinimum: 
+          MaxLength: 
+          MinLength: 
+          Pattern: 
+          MultipleOf: 
+          Default: 
+          ReadOnly: false
+          WriteOnly: false
+          AllOf: []
+          OneOf: []
+          AnyOf: []
+          Not: 
+          Required: []
+          Items: 
+          MaxItems: 
+          MinItems: 
+          UniqueItems: 
+          Properties: {}
+          MaxProperties: 
+          MinProperties: 
+          AdditionalPropertiesAllowed: true
+          AdditionalProperties: 
+          Discriminator: 
+          Example: 
+          Enum: []
+          Nullable: false
+          ExternalDocs: 
+          Deprecated: false
+          Xml: 
+          Extensions: {}
+          UnresolvedReference: false
+          Reference: 
+        name:
+          Title: 
+          Type: string
+          Format: 
+          Description: 
+          Maximum: 
+          ExclusiveMaximum: 
+          Minimum: 
+          ExclusiveMinimum: 
+          MaxLength: 
+          MinLength: 
+          Pattern: 
+          MultipleOf: 
+          Default: 
+          ReadOnly: false
+          WriteOnly: false
+          AllOf: []
+          OneOf: []
+          AnyOf: []
+          Not: 
+          Required: []
+          Items: 
+          MaxItems: 
+          MinItems: 
+          
