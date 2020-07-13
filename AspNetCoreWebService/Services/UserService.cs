@@ -14,7 +14,7 @@ namespace AspNetCoreWebService.Services
 
         public User GetUser(int id)
         {
-            return GetUsers().Where(user => user.Id == id).First();
+            return GetUsers().Where(user => user.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<User> GetUsers()
@@ -27,7 +27,7 @@ namespace AspNetCoreWebService.Services
                     Name = Names[index],
                     Email = $"{Names[index]}@example.com",
                     EmailConfirmed = index % 2 == 0,
-                    PasswordHash = "06d49632c9dc9bcb62aeaef99612ba6b"
+                    //PasswordHash = "06d49632c9dc9bcb62aeaef99612ba6b"
                 })
                 .ToArray();
         }

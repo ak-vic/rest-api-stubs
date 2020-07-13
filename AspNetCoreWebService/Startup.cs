@@ -36,10 +36,13 @@ namespace AspNetCoreWebService
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Test API",
+                    Title = "Test API Service",
                     Description = "ASP.NET Core Web API"
                 });
+                var filePath = Path.Combine(AppContext.BaseDirectory, $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                c.IncludeXmlComments(filePath);
             });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

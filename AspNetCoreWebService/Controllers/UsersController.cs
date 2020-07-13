@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AspNetCoreWebService.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using System.Net.Mime;
 
 namespace AspNetCoreWebService.Controllers
 {
@@ -20,6 +22,10 @@ namespace AspNetCoreWebService.Controllers
             this.userService = userService;
         }
 
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("/users")]
         public IEnumerable<User> Get()
@@ -27,32 +33,83 @@ namespace AspNetCoreWebService.Controllers
             return userService.GetUsers();
         }
 
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("/users/{id}")]
-        public User Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<User> Get(int id)
         {
-            return userService.GetUser(id);
-        }
-
-        [HttpPost]
-        [Route("/users")]
-        public User Create(User user)
-        {
+            var user = userService.GetUser(id);
+            if(user == null)
+            {
+                return NotFound();
+            }
             return user;
         }
 
-        [HttpPut]
-        [Route("/users/{id}")]
-        public User Update(int id)
+        /// <summary>
+        /// Create a user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Created user object</returns>
+        [HttpPost]
+        [Route("/users")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<User> Create(User user)
         {
-            return userService.GetUser(id);
+            user.Id = 9999;
+            return CreatedAtAction(nameof(Get), new { id = 9999 }, user);
         }
 
+        /// <summary>
+        /// Update user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("/users/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<User> Update(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+            userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// Delete user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("/users/{id}")]
-        public User Delete(int id)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<User> Delete(int id)
         {
-            return userService.GetUser(id);
+            var user = userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

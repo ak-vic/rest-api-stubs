@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspNetCoreWebService</name>
+    </assembly>
+    <members>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Get">
+            <summary>
+            Get all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Get(System.Int32)">
+            <summary>
+            Get user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Create(AspNetCoreWebService.User)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="user"></param>
+            <returns>Created user object</returns>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Update(System.Int32,AspNetCoreWebService.User)">
+            <summary>
+            Update user
+            </summary>
+            <param name="id"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Delete(System.Int32)">
+            <summary>
+            Delete user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
