@@ -9,47 +9,47 @@ using Microsoft.Extensions.Logging;
 namespace AspNetCoreWebService.Controllers
 {
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {       
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<UsersController> _logger;
         private readonly UserService userService;
 
-        public UserController(ILogger<UserController> logger, UserService userService)
+        public UsersController(ILogger<UsersController> logger, UserService userService)
         {
             _logger = logger;
             this.userService = userService;
         }
 
         [HttpGet]
-        [Route("/user")]
+        [Route("/users")]
         public IEnumerable<User> Get()
         {
             return userService.GetUsers();
         }
 
         [HttpGet]
-        [Route("/user/{id}")]
+        [Route("/users/{id}")]
         public User Get(int id)
         {
             return userService.GetUser(id);
         }
 
         [HttpPost]
-        [Route("/user")]
+        [Route("/users")]
         public User Create(User user)
         {
             return user;
         }
 
         [HttpPut]
-        [Route("/user/{id}")]
+        [Route("/users/{id}")]
         public User Update(int id)
         {
             return userService.GetUser(id);
         }
 
         [HttpDelete]
-        [Route("/user/{id}")]
+        [Route("/users/{id}")]
         public User Delete(int id)
         {
             return userService.GetUser(id);
