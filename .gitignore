@@ -1,1 +1,4 @@
 .vs
+/AspNetCoreWebService/bin
+/AspNetCoreWebService/obj
+/AspNetCoreWebService/Logs

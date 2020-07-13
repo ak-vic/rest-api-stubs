@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AspNetCoreWebService
@@ -29,7 +30,7 @@ namespace AspNetCoreWebService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient(typeof(UserService));
+            services.AddTransient<UserService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -38,18 +39,17 @@ namespace AspNetCoreWebService
                     Title = "Test API",
                     Description = "ASP.NET Core Web API"
                 });
-                c.DocumentFilter<YamlDocumentFilter>();
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {
+        {           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseMiddleware<LogMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -64,24 +64,8 @@ namespace AspNetCoreWebService
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
             });
-        }
-
-        private class YamlDocumentFilter : IDocumentFilter
-        {
-            public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
-            {
-                string file = AppDomain.CurrentDomain.BaseDirectory + "swagger.yaml";
-                if (!File.Exists(file))
-                {
-                    var serializer = new YamlDotNet.Serialization.Serializer();
-                    using (var writer = new StringWriter())
-                    {
-                        serializer.Serialize(writer, swaggerDoc);
-                        var stream = new StreamWriter(file);
-                        stream.WriteLine(writer.ToString());
-                    }
-                }
-            }
+            loggerFactory.AddSerilog();
+            loggerFactory.AddFile(pathFormat: "Logs/AspNetCoreWebService-{Date}.txt", outputTemplate : "{Timestamp:o} [RequestId: {RequestId,13}] [{Level:u3}] {Message} ({EventId:x8}){NewLine}{Exception}");
         }
     }
 }
