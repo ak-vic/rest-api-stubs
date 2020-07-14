@@ -37,10 +37,11 @@ namespace AspNetCoreWebService
                 {
                     Version = "v1",
                     Title = "Test API Service",
-                    Description = "ASP.NET Core Web API"
+                    Description = "Sample ASP.NET Core Web API for test purpose"
                 });
                 var filePath = Path.Combine(AppContext.BaseDirectory, $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml");
                 c.IncludeXmlComments(filePath);
+                //c.DocumentFilter<SwaggerFilter>();
             });
            
         }
@@ -61,8 +62,7 @@ namespace AspNetCoreWebService
             {
                 endpoints.MapControllers();
             });
-
-            app.UseSwagger();
+            SwaggerBuilderExtensions.UseSwagger(app);
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");

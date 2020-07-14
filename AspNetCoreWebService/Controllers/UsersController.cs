@@ -21,7 +21,7 @@ namespace AspNetCoreWebService.Controllers
             _logger = logger;
             this.userService = userService;
         }
-
+        /*
         /// <summary>
         /// Get all users
         /// </summary>
@@ -51,7 +51,7 @@ namespace AspNetCoreWebService.Controllers
             }
             return user;
         }
-
+        
         /// <summary>
         /// Create a user
         /// </summary>
@@ -67,7 +67,7 @@ namespace AspNetCoreWebService.Controllers
             user.Id = 9999;
             return CreatedAtAction(nameof(Get), new { id = 9999 }, user);
         }
-
+*/
         /// <summary>
         /// Update user
         /// </summary>
@@ -85,11 +85,14 @@ namespace AspNetCoreWebService.Controllers
             {
                 return BadRequest();
             }
-            userService.GetUser(id);
-            if (user == null)
+            var originalUser = userService.GetUser(id);
+            if (originalUser == null)
             {
                 return NotFound();
             }
+            //TODO: fix types in OAS, fix return value
+            //originalUser.Created = user.Created;
+            //return originalUser;
             return Ok();
         }
 
