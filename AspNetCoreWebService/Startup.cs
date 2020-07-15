@@ -41,7 +41,6 @@ namespace AspNetCoreWebService
                 });
                 var filePath = Path.Combine(AppContext.BaseDirectory, $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml");
                 c.IncludeXmlComments(filePath);
-                //c.DocumentFilter<SwaggerFilter>();
             });
            
         }
