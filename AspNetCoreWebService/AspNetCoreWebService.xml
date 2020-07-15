@@ -4,38 +4,23 @@
         <name>AspNetCoreWebService</name>
     </assembly>
     <members>
-        <member name="M:AspNetCoreWebService.Controllers.UsersController.Update(System.Int32,AspNetCoreWebService.Controllers.User)">
-            <summary>
-            Update user
-            </summary>
-            <param name="id"></param>
-            <param name="user"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersController.Delete(System.Int32)">
-            <summary>
-            Delete user
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.UsersAll(System.Threading.CancellationToken)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Get">
             <summary>Get all users</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Users(AspNetCoreWebService.Controllers.User,System.Threading.CancellationToken)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Create(AspNetCoreWebService.User)">
             <summary>Create a user</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Users2(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.GetById(System.Int32)">
             <summary>Get user by id</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Users3(System.Int32,AspNetCoreWebService.Controllers.User,System.Threading.CancellationToken)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Update(System.Int32,AspNetCoreWebService.User)">
             <summary>Update user</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Users4(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Delete(System.Int32)">
             <summary>Delete user</summary>
             <returns>Success</returns>
         </member>

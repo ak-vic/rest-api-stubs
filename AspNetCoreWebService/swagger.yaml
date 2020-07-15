@@ -2,13 +2,14 @@ openapi: 3.0.1
 info:
   title: Test API Service
   description: Sample ASP.NET Core Web API for test purpose
-  version: "v2-oas3"
+  version: "1.0.0"
 paths:
   /users:
     get:
       tags:
         - Users
       summary: Get all users
+      operationId: Get
       responses:
         '200':
           description: Success
@@ -32,6 +33,7 @@ paths:
       tags:
         - Users
       summary: Create a user
+      operationId: Create
       requestBody:
         description: ''
         content:
@@ -68,6 +70,7 @@ paths:
       tags:
         - Users
       summary: Get user by id
+      operationId: GetById
       parameters:
         - name: id
           in: path
@@ -106,6 +109,7 @@ paths:
       tags:
         - Users
       summary: Update user
+      operationId: Update
       parameters:
         - name: id
           in: path
@@ -168,6 +172,7 @@ paths:
       tags:
         - Users
       summary: Delete user
+      operationId: Delete
       parameters:
         - name: id
           in: path

@@ -17,7 +17,12 @@ namespace AspNetCoreWebService.Services
             return GetUsers().Where(user => user.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<User> GetUsers()
+        public User GetUser(string name)
+        {
+            return GetUsers().Where(user => user.Name == name).FirstOrDefault();
+        }
+
+        public List<User> GetUsers()
         {
             return Enumerable.Range(0, 9)
                 .Select((user, index) => new User()
@@ -29,7 +34,7 @@ namespace AspNetCoreWebService.Services
                     EmailConfirmed = index % 2 == 0,
                     //PasswordHash = "06d49632c9dc9bcb62aeaef99612ba6b"
                 })
-                .ToArray();
+                .ToList();
         }
     }
 }
