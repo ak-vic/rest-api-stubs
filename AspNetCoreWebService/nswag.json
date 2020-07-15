@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "swagger.json",
+      "url": "swagger.yaml",
       "output": null
     }
   },
@@ -34,10 +34,10 @@
       "responseClass": "SwaggerResponse",
       "namespace": "$(RootNamespace).Controllers",
       "requiredPropertiesMustBeDefined": true,
-      "dateType": "System.DateTimeOffset",
+      "dateType": "System.DateTime",
       "jsonConverters": null,
       "anyType": "object",
-      "dateTimeType": "System.DateTimeOffset",
+      "dateTimeType": "System.DateTime",
       "timeType": "System.TimeSpan",
       "timeSpanType": "System.TimeSpan",
       "arrayType": "System.Collections.Generic.List",

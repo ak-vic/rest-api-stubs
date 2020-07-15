@@ -90,8 +90,11 @@ namespace AspNetCoreWebService.Controllers
             {
                 return NotFound();
             }
-            //TODO: fix types in OAS, fix return value
-            //originalUser.Created = user.Created;
+            originalUser.Created = user.Created;
+            originalUser.Email = user.Email;
+            originalUser.EmailConfirmed = user.EmailConfirmed;
+            originalUser.Name = user.Name;
+            //TODO: fix return value
             //return originalUser;
             return Ok();
         }
