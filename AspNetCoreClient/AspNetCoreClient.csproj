@@ -15,10 +15,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
   <Target Name="NSwagClient" AfterTargets="BeforeCompile">
     <PropertyGroup>
       <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreClient</ProjectBaseName>
@@ -34,7 +30,7 @@
       <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreClient</ProjectBaseName>
     </PropertyGroup>
     <PropertyGroup>
-      <OutputFilePath>..\Entities</OutputFilePath>
+      <OutputFilePath>..\Models</OutputFilePath>
     </PropertyGroup>
     <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\remote_Dto_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
   </Target>
