@@ -1,6 +1,7 @@
 .vs
-/bin
-/obj
-/Logs
+/AspNetCoreWebService/Logs
 /AspNetCoreWebService/bin
 /AspNetCoreWebService/obj
+/AspNetCoreClient/bin
+/AspNetCoreClient/obj
+/AspNetCoreClient/*.user
