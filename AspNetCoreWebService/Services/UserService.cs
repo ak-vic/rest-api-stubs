@@ -19,7 +19,7 @@ namespace AspNetCoreWebService.Services
 
         public User GetUser(string name)
         {
-            return GetUsers().Where(user => user.Name == name).FirstOrDefault();
+            return GetUsers().Where(user => user.Name.ToUpper() == name.ToUpper()).FirstOrDefault();
         }
 
         public List<User> GetUsers()

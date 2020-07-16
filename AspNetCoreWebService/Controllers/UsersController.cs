@@ -55,6 +55,16 @@ namespace AspNetCoreWebService.Controllers
             return user;
         }
 
+        public async override Task<ActionResult<User>> GetByName([BindRequired] string name)
+        {
+            var user = userService.GetUser(name);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
         public async override Task<ActionResult<User>> Update(int id, [FromBody] User user)
         {
              if (id != user.Id)

@@ -3,6 +3,8 @@ info:
   title: Test API Service
   description: Sample ASP.NET Core Web API for test purpose
   version: "1.0.0"
+servers:
+  - url: /api/v1
 paths:
   /users:
     get:
@@ -185,6 +187,45 @@ paths:
       responses:
         '204':
           description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/users/name/{name}':
+    get:
+      tags:
+        - Users
+      summary: Get user by name
+      operationId: GetByName
+      parameters:
+        - name: name
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
         '404':
           description: Not Found
           content:

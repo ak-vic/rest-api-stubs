@@ -24,5 +24,9 @@
             <summary>Delete user</summary>
             <returns>Success</returns>
         </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.GetByName(System.String)">
+            <summary>Get user by name</summary>
+            <returns>Success</returns>
+        </member>
     </members>
 </doc>

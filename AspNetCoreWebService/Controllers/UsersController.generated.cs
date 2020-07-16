@@ -15,6 +15,7 @@ namespace AspNetCoreWebService.Controllers
     using System = global::System;
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.6.2.0 (NJsonSchema v10.1.23.0 (Newtonsoft.Json v12.0.0.0))")]
+    [Microsoft.AspNetCore.Mvc.Route("api/v1")]
     public abstract class UsersControllerBase : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         /// <summary>Get all users</summary>
@@ -41,6 +42,11 @@ namespace AspNetCoreWebService.Controllers
         /// <returns>Success</returns>
         [Microsoft.AspNetCore.Mvc.HttpDelete, Microsoft.AspNetCore.Mvc.Route("users/{id}")]
         public abstract System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Delete([Microsoft.AspNetCore.Mvc.ModelBinding.BindRequired] int id);
+    
+        /// <summary>Get user by name</summary>
+        /// <returns>Success</returns>
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("users/name/{name}")]
+        public abstract System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.ActionResult<User>> GetByName([Microsoft.AspNetCore.Mvc.ModelBinding.BindRequired] string name);
     
     }
 
