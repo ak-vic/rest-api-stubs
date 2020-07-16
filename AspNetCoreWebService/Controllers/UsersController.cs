@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using AspNetCoreWebService.Models;
 
 namespace AspNetCoreWebService.Controllers
 {

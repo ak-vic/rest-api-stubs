@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="swagger.yaml" />
+    <Content Include="SwaggerSchemas\swagger.yaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,14 +32,28 @@
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
 
-  <Target Name="NSwag" AfterTargets="BeforeCompile">
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <Target Name="NSwagController" AfterTargets="BeforeCompile">
     <PropertyGroup>
       <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreWebService</ProjectBaseName>
     </PropertyGroup>
     <PropertyGroup>
-      <OutputFilePath>Controllers</OutputFilePath>
+      <OutputFilePath>..\Controllers</OutputFilePath>
     </PropertyGroup>
-    <Exec Command="$(NSwagExe_Core31) run nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
+    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\controller_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
+  </Target>
+
+  <Target Name="NSwagDto" AfterTargets="BeforeCompile">
+    <PropertyGroup>
+      <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreWebService</ProjectBaseName>
+    </PropertyGroup>
+    <PropertyGroup>
+      <OutputFilePath>..\Models</OutputFilePath>
+    </PropertyGroup>
+    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\dto_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
   </Target>
 
 </Project>

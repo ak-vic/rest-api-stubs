@@ -8,7 +8,7 @@
             <summary>Get all users</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Create(AspNetCoreWebService.User)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Create(AspNetCoreWebService.Models.User)">
             <summary>Create a user</summary>
             <returns>Success</returns>
         </member>
@@ -16,7 +16,7 @@
             <summary>Get user by id</summary>
             <returns>Success</returns>
         </member>
-        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Update(System.Int32,AspNetCoreWebService.User)">
+        <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Update(System.Int32,AspNetCoreWebService.Models.User)">
             <summary>Update user</summary>
             <returns>Success</returns>
         </member>

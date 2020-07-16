@@ -19,7 +19,7 @@
       "routeNamingStrategy": "None",
       "className": "Users",
       "operationGenerationMode": "MultipleClientsFromOperationId",
-      "additionalNamespaceUsages": [],
+      "additionalNamespaceUsages": [ "AspNetCoreWebService.Models" ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": false,
       "generateJsonMethods": false,
