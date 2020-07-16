@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.6.2" />
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.6.2" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.6.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+  <Target Name="NSwagClient" AfterTargets="BeforeCompile">
+    <PropertyGroup>
+      <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreClient</ProjectBaseName>
+    </PropertyGroup>
+    <PropertyGroup>
+      <OutputFilePath>..\Services</OutputFilePath>
+    </PropertyGroup>
+    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\remote_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
+  </Target>
+
+  <Target Name="NSwagDto" AfterTargets="BeforeCompile">
+    <PropertyGroup>
+      <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreClient</ProjectBaseName>
+    </PropertyGroup>
+    <PropertyGroup>
+      <OutputFilePath>..\Entities</OutputFilePath>
+    </PropertyGroup>
+    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\remote_Dto_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
+  </Target>
+
+</Project>
