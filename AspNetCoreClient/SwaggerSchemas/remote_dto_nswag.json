@@ -54,7 +54,7 @@
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
-      "namespace": "AspNetCoreClient.Services",
+      "namespace": "$(RootNamespace).Models",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTime",
       "jsonConverters": null,

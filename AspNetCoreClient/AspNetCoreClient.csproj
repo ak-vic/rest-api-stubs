@@ -15,6 +15,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
   <Target Name="NSwagClient" AfterTargets="BeforeCompile">
     <PropertyGroup>
       <ProjectBaseName Condition="'$(ProjectBaseName)'==''">AspNetCoreClient</ProjectBaseName>

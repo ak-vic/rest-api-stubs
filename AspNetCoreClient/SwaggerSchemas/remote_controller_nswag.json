@@ -41,7 +41,7 @@
       "queryNullValue": "",
       "className": "{controller}RemoteService",
       "operationGenerationMode": "MultipleClientsFromOperationId",
-      "additionalNamespaceUsages": [],
+      "additionalNamespaceUsages": [ "$(RootNamespace).Models" ],
       "additionalContractNamespaceUsages": [],
       "generateOptionalParameters": false,
       "generateJsonMethods": false,

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AspNetCoreClient.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AspNetCoreClient.Models;
 
 namespace AspNetCoreClient.Controllers
 {
