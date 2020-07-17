@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "swagger.yaml",
+      "url": "oas.yaml",
       "output": null,
       "newLineBehavior": "Auto"
     }

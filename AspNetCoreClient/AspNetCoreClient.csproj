@@ -22,7 +22,7 @@
     <PropertyGroup>
       <OutputFilePath>..\Services</OutputFilePath>
     </PropertyGroup>
-    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\remote_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
+    <Exec Command="$(NSwagExe_Core31) run SwaggerSchemas\remote_controller_nswag.json /variables:Configuration=$(Configuration),RootNamespace=$(RootNamespace),OutputFilePath=$(OutputFilePath)" />
   </Target>
 
   <Target Name="NSwagDto" AfterTargets="BeforeCompile">
