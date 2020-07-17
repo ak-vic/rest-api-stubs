@@ -16,7 +16,7 @@
       "useCancellationToken": false,
       "useActionResultType": true,
       "generateModelValidationAttributes": true,
-      "routeNamingStrategy": "None",
+      "routeNamingStrategy": "OperationId",
       "className": "Users",
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "additionalNamespaceUsages": [ "$(RootNamespace).Models" ],

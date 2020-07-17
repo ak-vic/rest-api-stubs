@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreClient.Services;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace AspNetCoreClient
 {
@@ -27,6 +29,17 @@ namespace AspNetCoreClient
         {
             services.AddControllers();
             services.AddHttpClient<RemoteService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Test API Proxy Service",
+                    Description = "Sample ASP.NET Core Web API Proxy for test purpose"
+                });
+                var filePath = Path.Combine(AppContext.BaseDirectory, $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                c.IncludeXmlComments(filePath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +57,11 @@ namespace AspNetCoreClient
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            SwaggerBuilderExtensions.UseSwagger(app);
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API Proxy V1");
             });
         }
     }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using AspNetCoreWebService.Models;
+using System.Threading;
 
 namespace AspNetCoreWebService.Controllers
 {
@@ -31,6 +32,8 @@ namespace AspNetCoreWebService.Controllers
             return CreatedAtAction(nameof(Get), new { id = 9999 }, user);
         }
 
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
         public async override Task<IActionResult> Delete(int id)
         {
             var user = userService.GetUser(id);
@@ -66,22 +69,18 @@ namespace AspNetCoreWebService.Controllers
             return user;
         }
 
-        public async override Task<ActionResult<User>> Update(int id, [FromBody] User user)
+        public async override Task<IActionResult> Update(int id, [FromBody] User user)
         {
-             if (id != user.Id)
-             {
-                 return BadRequest();
-             }
-             var originalUser = userService.GetUser(id);
-             if (originalUser == null)
-             {
-                 return NotFound();
-             }
-             originalUser.Created = user.Created;
-             originalUser.Email = user.Email;
-             originalUser.EmailConfirmed = user.EmailConfirmed;
-             originalUser.Name = user.Name;
-             return originalUser;
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+            var originalUser = userService.GetUser(id);
+            if (originalUser == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

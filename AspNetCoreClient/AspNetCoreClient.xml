@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspNetCoreClient</name>
+    </assembly>
+    <members>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetAsync">
+            <summary>Get all users</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetAsync(System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Get all users</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.CreateAsync(AspNetCoreClient.Models.User)">
+            <summary>Create a user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.CreateAsync(AspNetCoreClient.Models.User,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Create a user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetByIdAsync(System.Int32)">
+            <summary>Get user by id</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetByIdAsync(System.Int32,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Get user by id</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.UpdateAsync(System.Int32,AspNetCoreClient.Models.User)">
+            <summary>Update user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.UpdateAsync(System.Int32,AspNetCoreClient.Models.User,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Update user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.DeleteAsync(System.Int32)">
+            <summary>Delete user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.DeleteAsync(System.Int32,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Delete user</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetByNameAsync(System.String)">
+            <summary>Get user by name</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+        <member name="M:AspNetCoreClient.Services.RemoteService.GetByNameAsync(System.String,System.Threading.CancellationToken)">
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <summary>Get user by name</summary>
+            <returns>Success</returns>
+            <exception cref="T:AspNetCoreClient.Services.ApiException">A server side error occurred.</exception>
+        </member>
+    </members>
+</doc>
