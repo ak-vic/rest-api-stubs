@@ -12,6 +12,7 @@ namespace AspNetCoreClient.Controllers
 {
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
+    [Route("api/v1")]
     public class UsersProxyController : ControllerBase
     {
         private readonly ILogger<UsersProxyController> _logger;
