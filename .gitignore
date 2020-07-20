@@ -2,6 +2,7 @@
 /AspNetCoreWebService/Logs
 /AspNetCoreWebService/bin
 /AspNetCoreWebService/obj
+/AspNetCoreClient/Logs
 /AspNetCoreClient/bin
 /AspNetCoreClient/obj
 /AspNetCoreClient/*.user

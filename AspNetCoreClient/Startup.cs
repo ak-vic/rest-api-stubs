@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace AspNetCoreClient
 {
@@ -43,13 +44,14 @@ namespace AspNetCoreClient
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
+            app.UseMiddleware<LogMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -63,6 +65,8 @@ namespace AspNetCoreClient
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API Proxy V1");
             });
+            loggerFactory.AddSerilog();
+            loggerFactory.AddFile(pathFormat: "Logs/AspNetCoreWebService-{Date}.txt", outputTemplate: "{Timestamp:o} [RequestId: {RequestId,13}] [{Level:u3}] {Message} ({EventId:x8}){NewLine}{Exception}");
         }
     }
 }
