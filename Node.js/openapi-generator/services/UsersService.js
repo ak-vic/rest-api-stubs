@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const DalService = require('./DalService');
 
 /**
 * Create a user
@@ -89,8 +90,7 @@ const getUserByName = ({ name }) => new Promise(
 const getUsers = () => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-      }));
+      Service.successResponse(DalService.getUsers());
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
