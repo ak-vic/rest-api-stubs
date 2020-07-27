@@ -1,0 +1,287 @@
+openapi: 3.0.1
+info:
+  description: Sample ASP.NET Core Web API for test purpose
+  title: Test API Service
+  version: 1.0.0
+servers:
+- url: /api/v1
+paths:
+  /users:
+    get:
+      operationId: GetUser
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: Success
+      summary: Get all users
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+    post:
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "201":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Bad Request
+      summary: Create a user
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+  /users/{id}:
+    delete:
+      operationId: DeleteUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Success
+        "404":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Not Found
+      summary: Delete user
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+    get:
+      operationId: GetUserById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+        "404":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Not Found
+      summary: Get user by id
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+    put:
+      operationId: UpdateUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "204":
+          description: Success
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Bad Request
+        "404":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Not Found
+      summary: Update user
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+  /users/name/{name}:
+    get:
+      operationId: GetUserByName
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          nullable: true
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+        "404":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+          description: Not Found
+      summary: Get user by name
+      tags:
+      - Users
+      x-eov-operation-handler: controllers/UsersController
+components:
+  schemas:
+    User:
+      additionalProperties: false
+      example:
+        emailConfirmed: true
+        created: 2000-01-23T04:56:07.000+00:00
+        name: name
+        id: 0
+        email: email
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+        email:
+          format: email
+          type: string
+        created:
+          format: date-time
+          type: string
+        emailConfirmed:
+          type: boolean
+      required:
+      - email
+      - name
+      type: object
+    ProblemDetails:
+      additionalProperties:
+        additionalProperties: false
+        type: object
+      properties:
+        type:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        detail:
+          nullable: true
+          type: string
+        instance:
+          nullable: true
+          type: string
+      type: object
