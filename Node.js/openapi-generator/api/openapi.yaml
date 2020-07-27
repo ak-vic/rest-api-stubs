@@ -8,7 +8,7 @@ servers:
 paths:
   /users:
     get:
-      operationId: GetUser
+      operationId: getUser
       responses:
         "200":
           content:
@@ -33,7 +33,7 @@ paths:
       - Users
       x-eov-operation-handler: controllers/UsersController
     post:
-      operationId: CreateUser
+      operationId: createUser
       requestBody:
         content:
           application/json:
@@ -70,7 +70,7 @@ paths:
       x-eov-operation-handler: controllers/UsersController
   /users/{id}:
     delete:
-      operationId: DeleteUser
+      operationId: deleteUser
       parameters:
       - explode: false
         in: path
@@ -100,7 +100,7 @@ paths:
       - Users
       x-eov-operation-handler: controllers/UsersController
     get:
-      operationId: GetUserById
+      operationId: getUserById
       parameters:
       - explode: false
         in: path
@@ -140,7 +140,7 @@ paths:
       - Users
       x-eov-operation-handler: controllers/UsersController
     put:
-      operationId: UpdateUser
+      operationId: updateUser
       parameters:
       - explode: false
         in: path
@@ -194,7 +194,7 @@ paths:
       x-eov-operation-handler: controllers/UsersController
   /users/name/{name}:
     get:
-      operationId: GetUserByName
+      operationId: getUserByName
       parameters:
       - explode: false
         in: path
