@@ -21,6 +21,9 @@ class DalService{
     static getUserById(id){
         return this.getUsers().filter((user) => user.id === id);
     }
+    static getUserByName(name){
+        return this.getUsers().filter((user) => user.name.toUpperCase() === name.toUpperCase());
+    }
 }
 
 module.exports = DalService;
