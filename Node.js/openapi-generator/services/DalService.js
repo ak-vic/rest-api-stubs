@@ -18,6 +18,9 @@ class DalService{
         );
         return users;
     }
+    static getUserById(id){
+        return this.getUsers().filter((user) => user.id === id);
+    }
 }
 
 module.exports = DalService;

@@ -6,6 +6,10 @@ class Service {
   static successResponse(payload, code = 200) {
     return { payload, code };
   }
+
+  static notFoundResponse(payload, code = 404) {
+    return { payload, code };
+  }
 }
 
 module.exports = Service;
