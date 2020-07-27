@@ -16,16 +16,16 @@ const deleteUser = async (request, response) => {
   await Controller.handleRequest(request, response, service.deleteUser);
 };
 
-const getUser = async (request, response) => {
-  await Controller.handleRequest(request, response, service.getUser);
-};
-
 const getUserById = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUserById);
 };
 
 const getUserByName = async (request, response) => {
   await Controller.handleRequest(request, response, service.getUserByName);
+};
+
+const getUsers = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getUsers);
 };
 
 const updateUser = async (request, response) => {
@@ -36,8 +36,8 @@ const updateUser = async (request, response) => {
 module.exports = {
   createUser,
   deleteUser,
-  getUser,
   getUserById,
   getUserByName,
+  getUsers,
   updateUser,
 };

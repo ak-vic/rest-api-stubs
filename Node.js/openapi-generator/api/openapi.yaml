@@ -8,7 +8,7 @@ servers:
 paths:
   /users:
     get:
-      operationId: getUser
+      operationId: getUsers
       responses:
         "200":
           content:

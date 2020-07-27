@@ -42,24 +42,6 @@ const deleteUser = ({ id }) => new Promise(
   },
 );
 /**
-* Get all users
-*
-* returns List
-* */
-const getUser = () => new Promise(
-  async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
-  },
-);
-/**
 * Get user by id
 *
 * id Integer 
@@ -100,6 +82,24 @@ const getUserByName = ({ name }) => new Promise(
   },
 );
 /**
+* Get all users
+*
+* returns List
+* */
+const getUsers = () => new Promise(
+  async (resolve, reject) => {
+    try {
+      resolve(Service.successResponse({
+      }));
+    } catch (e) {
+      reject(Service.rejectResponse(
+        e.message || 'Invalid input',
+        e.status || 405,
+      ));
+    }
+  },
+);
+/**
 * Update user
 *
 * id Integer 
@@ -125,8 +125,8 @@ const updateUser = ({ id, user }) => new Promise(
 module.exports = {
   createUser,
   deleteUser,
-  getUser,
   getUserById,
   getUserByName,
+  getUsers,
   updateUser,
 };
