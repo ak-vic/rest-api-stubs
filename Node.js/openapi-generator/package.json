@@ -4,7 +4,6 @@
   "description": "Sample ASP.NET Core Web API for test purpose",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
     "start": "node index.js"
   },
   "keywords": [

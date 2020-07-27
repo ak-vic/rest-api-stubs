@@ -90,7 +90,9 @@ const getUserByName = ({ name }) => new Promise(
 const getUsers = () => new Promise(
   async (resolve, reject) => {
     try {
-      Service.successResponse(DalService.getUsers());
+      resolve(
+        Service.successResponse(DalService.getUsers())
+      );
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
