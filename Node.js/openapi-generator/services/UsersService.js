@@ -8,12 +8,14 @@ const DalService = require('./DalService');
 * user User  (optional)
 * returns User
 * */
-const createUser = ({ user }) => new Promise(
+const createUser = ( user ) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        user,
-      }));
+      user.body.id = 9999;
+      resolve(Service.successResponse(
+        user.body,
+        201
+      ));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',

@@ -129,11 +129,19 @@ class Controller {
   static async handleRequest(request, response, serviceOperation) {
     try {
       const serviceResponse = await serviceOperation(this.collectRequestParams(request));
+      if(serviceResponse.code === 201){
+        const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.url, serviceResponse.payload.id);
+        response.location(location);
+      }
       Controller.sendResponse(response, serviceResponse);
     } catch (error) {
       Controller.sendError(response, error);
     }
   }
+}
+
+function joinAbsoluteUrlPath(...args) {
+  return args.map( pathPart => pathPart.toString().replace(/(^\/|\/$)/g, "") ).join("/");
 }
 
 module.exports = Controller;
