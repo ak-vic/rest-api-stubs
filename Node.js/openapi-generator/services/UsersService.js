@@ -8,14 +8,12 @@ const DalService = require('./DalService');
 * user User  (optional)
 * returns User
 * */
-const createUser = ( user ) => new Promise(
+const createUser = (params) => new Promise(
   async (resolve, reject) => {
     try {
-      user.body.id = 9999;
-      resolve(Service.successResponse(
-        user.body,
-        201
-      ));
+      const user = params.body;
+      user.id = 9999;
+      resolve(Service.successResponse(user, 201));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -35,12 +33,9 @@ const deleteUser = ({ id }) => new Promise(
     try {
       const users = DalService.getUserById(id);
       if(!users || users.length < 1){
-        reject(Service.notFoundResponse());
+        reject(Service.rejectResponse(null, 404));
       }
-      resolve(Service.successResponse(
-        null, 
-        204
-      ));
+      resolve(Service.successResponse(null, 204));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -60,11 +55,9 @@ const getUserById = ({ id }) => new Promise(
     try {
       const users = DalService.getUserById(id);
       if(!users || users.length < 1){
-        reject(Service.notFoundResponse());
+        reject(Service.rejectResponse(null, 404));
       }
-      resolve(Service.successResponse(
-        users[0]
-      ));
+      resolve(Service.successResponse(users[0]));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -84,11 +77,9 @@ const getUserByName = ({ name }) => new Promise(
     try {
       const users = DalService.getUserByName(name);
       if(!users || users.length < 1){
-        reject(Service.notFoundResponse());
+        reject(Service.rejectResponse(null, 404));
       }
-      resolve(Service.successResponse(
-        users[0]
-      ));
+      resolve(Service.successResponse(users[0]));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -123,13 +114,19 @@ const getUsers = () => new Promise(
 * user User  (optional)
 * no response value expected for this operation
 * */
-const updateUser = ({ id, user }) => new Promise(
+const updateUser = (params) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        id,
-        user,
-      }));
+      const id = params.id;
+      const user = params.body;
+      if(id !== user.id){
+        reject(Service.rejectResponse(null, 400));
+      }
+      const users = DalService.getUserById(id);
+      if(!users || users.length < 1){
+        reject(Service.rejectResponse(null, 404));
+      }
+      resolve(Service.successResponse(null, 204));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
