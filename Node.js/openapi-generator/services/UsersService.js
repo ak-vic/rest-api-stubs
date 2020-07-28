@@ -33,9 +33,14 @@ const createUser = ( user ) => new Promise(
 const deleteUser = ({ id }) => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-        id,
-      }));
+      const users = DalService.getUserById(id);
+      if(!users || users.length < 1){
+        reject(Service.notFoundResponse());
+      }
+      resolve(Service.successResponse(
+        null, 
+        204
+      ));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
