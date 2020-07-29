@@ -127,14 +127,20 @@ class Controller {
   }
 
   static async handleRequest(request, response, serviceOperation) {
+    const uuid = uuidv4();
     try {
-      const serviceResponse = await serviceOperation(this.collectRequestParams(request));
+      const params = this.collectRequestParams(request);
+      const logMessage = {requestId: uuid, method: request.method, url: request.url};
+      logger.info(logMessage);
+      const serviceResponse = await serviceOperation(params);
       if(serviceResponse.code === 201){
         const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.url, serviceResponse.payload.id);
         response.location(location);
       }
       Controller.sendResponse(response, serviceResponse);
     } catch (error) {
+      const logError = {requestId: uuid, error: error}
+      logger.error(logError);
       Controller.sendError(response, error);
     }
   }
@@ -142,6 +148,13 @@ class Controller {
 
 function joinAbsoluteUrlPath(...args) {
   return args.map( pathPart => pathPart.toString().replace(/(^\/|\/$)/g, "") ).join("/");
+}
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
 
 module.exports = Controller;
