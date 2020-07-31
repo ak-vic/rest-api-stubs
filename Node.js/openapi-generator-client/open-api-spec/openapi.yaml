@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Test API Service
-  description: Sample ASP.NET Core Web API for test purpose
+  description: Sample Node.js Web API Proxy
   version: "1.0.0"
 servers:
 - url: /api/v1

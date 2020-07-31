@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  description: Sample ASP.NET Core Web API for test purpose
+  description: Sample Node.js Web API
   title: Test API Service
   version: 1.0.0
 servers:
