@@ -24,6 +24,13 @@ class DalService{
     static getUserByName(name){
         return this.getUsers().filter((user) => user.name.toUpperCase() === name.toUpperCase());
     }
+    static createUser(user){
+        if(!this.userNames.includes(user.name)){
+            this.userNames.push(user.name);
+            return this.userNames.indexOf(user.name) + 1;
+        }
+        else throw `User with name "${user.name}" already exists`;
+    }
 }
 
 module.exports = DalService;

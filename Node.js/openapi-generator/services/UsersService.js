@@ -12,7 +12,8 @@ const createUser = (params) => new Promise(
   async (resolve, reject) => {
     try {
       const user = params.body;
-      user.id = 9999;
+      const id = DalService.createUser(user);
+      user.id = id;
       resolve(Service.successResponse(user, 201));
     } catch (e) {
       reject(Service.rejectResponse(
