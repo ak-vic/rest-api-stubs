@@ -136,7 +136,7 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body: User;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "User");
@@ -145,7 +145,9 @@ export class UsersApi {
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    body = ObjectSerializer.deserialize(body, "User");
+                    resolve({ response: response, body: body });
                 });
             });
         });
@@ -205,7 +207,7 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -213,7 +215,8 @@ export class UsersApi {
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    resolve({ response: response, body: body });
                 });
             });
         });
@@ -273,16 +276,18 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body: User;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
-                    } else {
+                    } else{
                         body = ObjectSerializer.deserialize(body, "User");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    body = ObjectSerializer.deserialize(body, "User");
+                    resolve({ response: response, body: body });
                 });
             });
         });
@@ -342,7 +347,7 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body: User;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "User");
@@ -351,7 +356,9 @@ export class UsersApi {
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    body = ObjectSerializer.deserialize(body, "User");
+                    resolve({ response: response, body: body });
                 });
             });
         });
@@ -404,7 +411,7 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body: Array<User>;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Array<User>");
@@ -413,7 +420,9 @@ export class UsersApi {
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    body = ObjectSerializer.deserialize(body, "Array<User>");
+                    resolve({ response: response, body: body });
                 });
             });
         });
@@ -475,7 +484,7 @@ export class UsersApi {
             }
             return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
+                    /*if (error) {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
@@ -483,7 +492,8 @@ export class UsersApi {
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
-                    }
+                    }*/
+                    resolve({ response: response, body: body });
                 });
             });
         });

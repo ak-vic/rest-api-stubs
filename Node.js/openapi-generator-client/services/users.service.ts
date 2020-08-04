@@ -1,37 +1,32 @@
 import * as api from '../api/apis';
 import * as models from '../model/models';
+import { IncomingMessage } from 'http';
 
 export class UsersService{
     constructor(private api: api.UsersApi) {
     }
 
-    async getUsers() {
-        const users = await this.api.getUsers();
-        return users.body;
+    async getUsers() : Promise<{response: IncomingMessage; body: models.User[];}> {
+        return await this.api.getUsers();
     }
 
-    async getUserById(id: number) {
-        const user = await this.api.getUserById(id);
-        return user.body;
+    async getUserById(id: number): Promise<{response: IncomingMessage; body: models.User;}> {
+        return await this.api.getUserById(id);
     }
 
-    async getUserByName(name: string) {
-        const user = await this.api.getUserByName(name);
-        return user.body;
+    async getUserByName(name: string) : Promise<{response: IncomingMessage; body: models.User;}> {
+        return await this.api.getUserByName(name);
     }
 
-    async createUser(user: models.User) {
-        const result = await this.api.createUser(user);        
-        return result.response;
+    async createUser(user: models.User) : Promise<{response: IncomingMessage; body: models.User;}> {
+        return await this.api.createUser(user);        
     }
 
-    async updateUser(id: number, user: models.User) {
-        const result = await this.api.updateUser(id, user);
-        return result.response;
+    async updateUser(id: number, user: models.User) : Promise<{response: IncomingMessage; body?: any;}> {
+        return await this.api.updateUser(id, user);
     }
     
-    async deleteUser(id: number) {
-        const result = await this.api.deleteUser(id);
-        return result.response;
+    async deleteUser(id: number) : Promise<{response: IncomingMessage; body?: any;}> {
+        return await this.api.deleteUser(id);
     }
 }
