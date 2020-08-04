@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const { OpenApiValidator } = require('express-openapi-validator');
 const logger = require('./logger');
 const config = require('./config');
+require('dotenv').config();
+const authMiddleware = require('./auth');
 
 class ExpressServer {
   constructor(port, openApiYaml) {
@@ -46,6 +48,7 @@ class ExpressServer {
       res.status(200);
       res.json(req.query);
     });
+    this.app.use(authMiddleware);
   }
 
   launch() {
@@ -58,7 +61,7 @@ class ExpressServer {
       .then(() => {
         // eslint-disable-next-line no-unused-vars
         this.app.use((err, req, res, next) => {
-          // format errors
+          // format errors          
           res.status(err.status || 500).json({
             message: err.message || err,
             errors: err.errors || '',

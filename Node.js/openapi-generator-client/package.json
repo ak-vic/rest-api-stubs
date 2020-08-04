@@ -15,13 +15,19 @@
     "@types/node": "^14.0.27"
   },
   "dependencies": {
+    "@types/btoa": "^1.2.3",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.7",
     "@types/js-yaml": "^3.12.5",
     "@types/request": "^2.48.5",
+    "@types/request-promise": "^4.1.46",
     "@types/swagger-jsdoc": "^3.0.2",
     "@types/swagger-ui-express": "^4.1.2",
+    "btoa": "^1.2.1",
     "copyfiles": "^2.3.0",
+    "dotenv": "^8.2.0",
     "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4"
   }

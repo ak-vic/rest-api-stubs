@@ -9,6 +9,45 @@ import path from 'path';
 //import swaggerJSDoc from "swagger-jsdoc";
 import { Endpoints } from "./endpoints";
 import { UsersApi } from './api/apis';
+import btoa from 'btoa';
+import * as models from './model/models';
+require('dotenv').config();
+import request from 'request-promise';
+
+const { ISSUER, CLIENT_ID, CLIENT_SECRET, SCOPE } = process.env
+
+const getAccessToken = async () => {
+  try {
+    const token = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
+    const auth = await request({
+      uri: `${ISSUER}/v1/token`,
+      json: true,
+      method: 'POST',
+      headers: {
+        authorization: `Basic ${token}`
+      },
+      form: {
+        grant_type: 'client_credentials',
+        scope: SCOPE
+      }
+    })
+
+    /*const response = await request({
+      uri,
+      method,
+      body,
+      headers: {
+        'content-type': 'application/json',
+        authorization: `${auth.token_type} ${auth.access_token}`
+      }
+    })
+
+    console.log(response)*/
+    return auth;
+  } catch (error) {
+    console.error(`Error: ${error.message}`)
+  }
+}
 
 const app = express();
 const openApiYamlPath = path.join(__dirname, 'open-api-spec', 'openapi.yaml');
@@ -21,6 +60,12 @@ async function bootstrap(app: any, openApiYamlPath: string) {
     const apiRouter = express.Router();
     app.use("/api/v1", apiRouter);
     const api: UsersApi = new UsersApi();
+    const oAuth = new models.OAuth();
+    const auth = await getAccessToken();
+    oAuth.accessToken = auth.access_token;
+    //if(auth.token_type === 'OAuth'){
+        api.setDefaultAuthentication(oAuth);
+    //}
     const usersService: UsersService = new UsersService(api);
     const usersController: UsersController = new UsersController(usersService);
     new Endpoints(apiRouter, usersController);
