@@ -46,7 +46,6 @@ export class UsersController{
             if(result.response.statusCode === 201){
                 res.header("Location", result.response.headers.location);
             }
-            res.status(result.response.statusCode).send(result.body);
             this.sendStatusCodeAndBody(res, result);
         }
         catch{

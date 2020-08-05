@@ -32,17 +32,6 @@ const getAccessToken = async () => {
       }
     })
 
-    /*const response = await request({
-      uri,
-      method,
-      body,
-      headers: {
-        'content-type': 'application/json',
-        authorization: `${auth.token_type} ${auth.access_token}`
-      }
-    })
-
-    console.log(response)*/
     return auth;
   } catch (error) {
     console.error(`Error: ${error.message}`)
@@ -63,9 +52,14 @@ async function bootstrap(app: any, openApiYamlPath: string) {
     const oAuth = new models.OAuth();
     const auth = await getAccessToken();
     oAuth.accessToken = auth.access_token;
-    //if(auth.token_type === 'OAuth'){
+    if(auth.token_type === 'Bearer'){
         api.setDefaultAuthentication(oAuth);
-    //}
+    }
+    else{
+        //throw new Error('Token type should be "Bearer"');
+        console.error('Token type should be "Bearer"');
+        return;
+    }
     const usersService: UsersService = new UsersService(api);
     const usersController: UsersController = new UsersController(usersService);
     new Endpoints(apiRouter, usersController);
