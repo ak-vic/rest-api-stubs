@@ -28,6 +28,8 @@ paths:
                   $ref: '#/components/schemas/User'
                 type: array
           description: Success
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'           
       summary: Get all users
       tags:
       - Users
@@ -64,6 +66,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Bad Request
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'           
       summary: Create a user
       tags:
       - Users
@@ -95,6 +99,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Not Found
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'           
       summary: Delete user
       tags:
       - Users
@@ -135,6 +141,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Not Found
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'           
       summary: Get user by id
       tags:
       - Users
@@ -188,6 +196,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Not Found
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'           
       summary: Update user
       tags:
       - Users
@@ -229,11 +239,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Not Found
+        "401":
+          $ref: '#/components/responses/UnauthorizedError'          
       summary: Get user by name
       tags:
       - Users
       x-eov-operation-handler: controllers/UsersController
 components:
+  securitySchemes:
+    oktaImplicitFlow:   # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes
+    oktaAuthorizationCodeFlow:    # <---- arbitrary name
+      type: oauth2
+      description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
+      flows:
+        implicit:   # <---- OAuth flow(authorizationCode, implicit, password or clientCredentials)
+          authorizationUrl: https://dev-820238.okta.com/oauth2/default/v1/authorize
+          scopes:
+            gateway_api: gateway api
+        authorizationCode:
+          authorizationUrl: https://dev-820238.okta.com/oauth2/default/v1/authorize
+          tokenUrl: https://dev-820238.okta.com/oauth2/default/v1/token
+          scopes:
+            openid: openid
+            profile: profile
+            email: email
+  responses:
+    UnauthorizedError:
+      description: Unauthorized  
   schemas:
     User:
       additionalProperties: false
@@ -242,7 +277,7 @@ components:
         created: 2000-01-23T04:56:07.000+00:00
         name: name
         id: 0
-        email: email
+        email: email@example.com
       properties:
         id:
           format: int32
@@ -285,3 +320,10 @@ components:
           nullable: true
           type: string
       type: object
+# Apply the security globally to all operations
+security:
+  - oktaImplicitFlow: []
+  - oktaAuthorizationCodeFlow: 
+    - openid
+    - profile
+    - email

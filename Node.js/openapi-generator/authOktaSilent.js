@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
     }
 
     const { claims } = await oktaJwtVerifier.verifyAccessToken(token, 'api://default');
-    if (!claims.scp.includes(process.env.SCOPE)) {
+    if (!claims.scp.includes(process.env.IMPLICIT_FLOW_SCOPE)) {
       throw new Error('Could not verify the proper scope');
     }
     next();
