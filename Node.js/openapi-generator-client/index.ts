@@ -18,13 +18,13 @@ const { ISSUER, CLIENT_ID, CLIENT_SECRET, SCOPE } = process.env
 
 const getAccessToken = async () => {
   try {
-    const token = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
+    const authHeader = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
     const auth = await request({
       uri: `${ISSUER}/v1/token`,
       json: true,
       method: 'POST',
       headers: {
-        authorization: `Basic ${token}`
+        authorization: `Basic ${authHeader}`
       },
       form: {
         grant_type: 'client_credentials',
@@ -49,16 +49,25 @@ async function bootstrap(app: any, openApiYamlPath: string) {
     const apiRouter = express.Router();
     app.use("/api/v1", apiRouter);
     const api: UsersApi = new UsersApi();
-    const oAuth = new models.OAuth();
-    const auth = await getAccessToken();
-    oAuth.accessToken = auth.access_token;
-    if(auth.token_type === 'Bearer'){
-        api.setDefaultAuthentication(oAuth);
+    if(process.env.DEFAULT_AUTHENTICATION === "API_KEY")
+    {
+        const apiKeyAuth = new models.ApiKeyAuth("query", "api_key");
+        apiKeyAuth.apiKey = process.env.API_KEY as string; 
+        api.setDefaultAuthentication(apiKeyAuth);
     }
-    else{
-        //throw new Error('Token type should be "Bearer"');
-        console.error('Token type should be "Bearer"');
-        return;
+    else
+    {
+        const auth = await getAccessToken();
+        const oAuth = new models.OAuth();
+        oAuth.accessToken = auth.access_token;
+        if(auth.token_type === 'Bearer'){
+            api.setDefaultAuthentication(oAuth);
+        }
+        else{
+            //throw new Error('Token type should be "Bearer"');
+            console.error('Token type should be "Bearer"');
+            return;
+        }
     }
     const usersService: UsersService = new UsersService(api);
     const usersController: UsersController = new UsersController(usersService);

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../config');
 const logger = require('../logger');
+const {uuidv4,joinAbsoluteUrlPath} = require('../common');
 
 class Controller {
   static sendResponse(response, payload) {
@@ -134,7 +135,8 @@ class Controller {
       logger.info(logMessage);
       const serviceResponse = await serviceOperation(params);
       if(serviceResponse.code === 201){
-        const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.url, serviceResponse.payload.id);
+        //const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.route.path, serviceResponse.payload.id, request._parsedUrl.search);
+        const location = joinAbsoluteUrlPath(`${config.BASE_PATH}`, request.route.path, serviceResponse.payload.id || null);console.log('end')
         response.location(location);
       }
       Controller.sendResponse(response, serviceResponse);
@@ -144,17 +146,6 @@ class Controller {
       Controller.sendError(response, error);
     }
   }
-}
-
-function joinAbsoluteUrlPath(...args) {
-  return args.map( pathPart => pathPart.toString().replace(/(^\/|\/$)/g, "") ).join("/");
-}
-
-function uuidv4() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
 }
 
 module.exports = Controller;

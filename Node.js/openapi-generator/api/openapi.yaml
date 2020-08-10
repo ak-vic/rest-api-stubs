@@ -247,6 +247,10 @@ paths:
       x-eov-operation-handler: controllers/UsersController
 components:
   securitySchemes:
+    ApiKeyAuth:         # arbitrary name for the security scheme
+      type: apiKey
+      in: query         # can be "header", "query" or "cookie"
+      name: api_key     # name of the header, query parameter or cookie            
     oktaImplicitFlow:   # arbitrary name for the security scheme
       type: http
       scheme: bearer
@@ -255,10 +259,6 @@ components:
       type: oauth2
       description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
       flows:
-        implicit:   # <---- OAuth flow(authorizationCode, implicit, password or clientCredentials)
-          authorizationUrl: https://dev-820238.okta.com/oauth2/default/v1/authorize
-          scopes:
-            gateway_api: gateway api
         authorizationCode:
           authorizationUrl: https://dev-820238.okta.com/oauth2/default/v1/authorize
           tokenUrl: https://dev-820238.okta.com/oauth2/default/v1/token
@@ -327,3 +327,4 @@ security:
     - openid
     - profile
     - email
+  - ApiKeyAuth: []     # use the same name as under securitySchemes    
