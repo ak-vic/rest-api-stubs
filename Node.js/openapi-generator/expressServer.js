@@ -46,13 +46,29 @@ class ExpressServer {
     const redirectUri = joinAbsoluteUrlPath(`${config.BASE_PATH}`, "authorization-code/callback");
     //View the openapi document in a visual interface. Should be able to test from this page
     this.app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(this.schema, false, { oauth2RedirectUrl: redirectUri }));
+    this.app.post('/login', async (req, res) => {
+      try {
+        const clientId = req.body.client_id;
+        const clientSecret = req.body.client_secret;
+        const scope = req.body.scope;
+        const token = await this.getAccessTokenClientCredentialsFlow(clientId, clientSecret, scope);
+        res.setHeader('Cache-Control', 'no-store');
+        res.setHeader('Pragma', 'no-cache');
+        res.send(token);
+      }
+      catch (error) {
+        console.log(error.message);
+        res.status(400).send(error);
+      }
+      
+    });
     this.app.get('/authorization-code/callback', async (req, res) => {
       try {
         const authCode = req.query.code;
-        const token = await this.getAccessToken(authCode, redirectUri); 
+        const token = await this.getAccessTokenAuthorizationCodeFlow(authCode, redirectUri); 
         res.setHeader('Cache-Control', 'no-store');
         res.setHeader('Pragma', 'no-cache');
-        res.status(200).send(token);
+        res.send(token);
       }
       catch (error) {
         console.log(error.message);
@@ -75,28 +91,43 @@ class ExpressServer {
       saveUninitialized: false
     }));
     this.app.use(oidc.router);
-
     this.app.get('/login', oidc.ensureAuthenticated(), (req, res) => {
-      res.json(req.query);
-    });
+    });    
     this.app.use(authApiKeyMiddleware);
   }
-
-  getAccessToken = async (authCode, redirect_uri) => {
-    const authHeader = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`)
+  getAccessTokenClientCredentialsFlow = async (clientId, clientSecret, scope) => {
+    const authHeader = btoa(`${clientId}:${clientSecret}`);
     const auth = await request({
       uri: `${process.env.ISSUER}/v1/token`,
       json: true,
-      method: 'POST',
+      method: "POST",
       headers: {
         authorization: `Basic ${authHeader}`,
-        accept: 'application/json'
+        accept: "application/json",
+        "cache-control": "no-cache"
       },
       form: {
-        grant_type: 'authorization_code',
-        code: authCode,
-        redirect_uri: redirect_uri
+        grant_type: "client_credentials",
+        scope: scope
       }
+    })
+    return auth;
+  }
+
+  getAccessTokenAuthorizationCodeFlow = async (authCode, redirect_uri) => {
+    const authHeader = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`);
+    const auth = await request({
+      uri: `${process.env.ISSUER}/v1/token`,
+      json: true,
+      method: "POST",
+      headers: {
+        authorization: `Basic ${authHeader}`,
+        accept: "application/json",
+      },
+      form: {
+        grant_type: "authorization_code",
+        code: authCode,
+        redirect_uri: redirect_uri }
     })
     return auth;
   }
