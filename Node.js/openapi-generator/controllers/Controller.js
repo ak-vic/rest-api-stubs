@@ -1,8 +1,9 @@
+const { logRequest } = require("../logger/logger");
 const fs = require('fs');
 const path = require('path');
 const config = require('../config');
-const logger = require('../logger');
-const {uuidv4,joinAbsoluteUrlPath} = require('../common');
+const logger = require('../logger/logger');
+const { uuidv4, joinAbsoluteUrlPath } = require('../common');
 
 class Controller {
   static sendResponse(response, payload) {
@@ -128,21 +129,29 @@ class Controller {
   }
 
   static async handleRequest(request, response, serviceOperation) {
-    const uuid = uuidv4();
     try {
-      const params = this.collectRequestParams(request);
-      const logMessage = {requestId: uuid, method: request.method, url: request.url};
-      logger.info(logMessage);
-      const serviceResponse = await serviceOperation(params);
-      if(serviceResponse.code === 201){
-        //const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.route.path, serviceResponse.payload.id, request._parsedUrl.search);
-        const location = joinAbsoluteUrlPath(`${config.BASE_PATH}`, request.route.path, serviceResponse.payload.id || null);console.log('end')
-        response.location(location);
+      let xRequestId = request.headers["x-request-id"];
+      let xCorrelationId = request.headers["x-correlation-id"];      
+      if (!xCorrelationId) {
+        xCorrelationId = uuidv4();
       }
+      if (!xRequestId) {
+        xRequestId = uuidv4();
+      }
+      //TODO: make conditional assignment
+      response.setHeader("x-correlation-id", xCorrelationId);
+      response.setHeader("x-request-id", xRequestId);
+      const params = this.collectRequestParams(request);
+      logRequest(request, response);
+      const serviceResponse = await serviceOperation(params);
+      if (serviceResponse.code === 201) {
+        //const location = joinAbsoluteUrlPath(`${request.protocol}://${request.get("host")}`, request.route.path, serviceResponse.payload.id, request._parsedUrl.search);
+        const location = joinAbsoluteUrlPath(`${config.BASE_PATH}`, request.route.path, serviceResponse.payload.id || null);
+        response.location(location);
+      };
       Controller.sendResponse(response, serviceResponse);
     } catch (error) {
-      const logError = {requestId: uuid, error: error}
-      logger.error(logError);
+      logRequest(request, response, error.message, "error");
       Controller.sendError(response, error);
     }
   }

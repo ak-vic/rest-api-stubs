@@ -1,3 +1,4 @@
+import { logger } from "./logger/logger"
 import express from 'express';
 import { UsersController } from "./controllers/users.controller";
 import { UsersService } from "./services/users.service";
@@ -13,6 +14,7 @@ import btoa from 'btoa';
 import * as models from './model/models';
 require('dotenv').config();
 import request from 'request-promise';
+import {loggerMiddleware, loggerErrorMiddleware} from './logger/loggerMiddleware';
 
 const { ISSUER, CLIENT_ID, CLIENT_SECRET, SCOPE } = process.env
 
@@ -34,7 +36,7 @@ const getAccessToken = async () => {
 
     return auth;
   } catch (error) {
-    console.error(`Error: ${error.message}`)
+    logger.error(`Error: ${error.message}`)
   }
 }
 
@@ -43,46 +45,52 @@ const openApiYamlPath = path.join(__dirname, 'open-api-spec', 'openapi.yaml');
 bootstrap(app, openApiYamlPath);
 
 async function bootstrap(app: any, openApiYamlPath: string) {
-    app.use(bodyParser.json());
-    //app.use(express.json());
-    //app.use(express.static(__dirname + "/public"));
-    const apiRouter = express.Router();
-    app.use("/api/v1", apiRouter);
-    const api: UsersApi = new UsersApi();
-    if(process.env.DEFAULT_AUTHENTICATION === "API_KEY")
-    {
-        const apiKeyAuth = new models.ApiKeyAuth("query", "api_key");
-        apiKeyAuth.apiKey = process.env.API_KEY as string; 
-        api.setDefaultAuthentication(apiKeyAuth);
+  logger.info("Starting Express Server...");
+  app.use(bodyParser.json());
+  app.use(loggerMiddleware);
+  //app.use(express.json());
+  //app.use(express.static(__dirname + "/public"));
+  const apiRouter = express.Router();
+  app.use("/api/v1", apiRouter);
+  const api: UsersApi = new UsersApi();
+  if (process.env.DEFAULT_AUTHENTICATION === "API_KEY") {
+    const apiKeyAuth = new models.ApiKeyAuth("query", "api_key");
+    apiKeyAuth.apiKey = process.env.API_KEY as string;
+    api.setDefaultAuthentication(apiKeyAuth);
+  }
+  else {
+    const auth = await getAccessToken();
+    const oAuth = new models.OAuth();
+    oAuth.accessToken = auth.access_token;
+    if (auth.token_type === 'Bearer') {
+      api.setDefaultAuthentication(oAuth);
     }
-    else
-    {
-        const auth = await getAccessToken();
-        const oAuth = new models.OAuth();
-        oAuth.accessToken = auth.access_token;
-        if(auth.token_type === 'Bearer'){
-            api.setDefaultAuthentication(oAuth);
-        }
-        else{
-            //throw new Error('Token type should be "Bearer"');
-            console.error('Token type should be "Bearer"');
-            return;
-        }
+    else {
+      //throw new Error('Token type should be "Bearer"');
+      logger.error('Token type should be "Bearer"');
+      return;
     }
-    const usersService: UsersService = new UsersService(api);
-    const usersController: UsersController = new UsersController(usersService);
-    new Endpoints(apiRouter, usersController);
-    let oas: swaggerUi.JsonObject = {};
-    try {
-        oas = jsYaml.safeLoad(fs.readFileSync(openApiYamlPath).toString()) as swaggerUi.JsonObject;
-    } catch (e) {
-        //logger.error('failed to start Express Server', e.message);
-        console.error('Failed to start Express Server.', e.message);
-        return;
-    }
-    app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(oas));
-    await app.listen(app.get("port") || 3007);
-    console.log("Server is waiting for incoming connections...");
+  }
+  const usersService: UsersService = new UsersService(api);
+  const usersController: UsersController = new UsersController(usersService);
+  new Endpoints(apiRouter, usersController);
+  let oas: swaggerUi.JsonObject = {};
+  try {
+    oas = jsYaml.safeLoad(fs.readFileSync(openApiYamlPath).toString()) as swaggerUi.JsonObject;
+  } catch (e) {
+    logger.error('Failed to start Express Server.', e.message);
+    return;
+  }
+  app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(oas));
+  /*app.all('*', (req: any, res: any, next: any) => {
+      res.status(404).json({
+        status: 'fail',
+        message: `Can't find ${req.originalUrl} on this server!`
+      });
+    });  */
+  app.use(loggerErrorMiddleware);
+  await app.listen(app.get("port") || 3007);
+  logger.info("Server is waiting for incoming connections...");
 }
 
 

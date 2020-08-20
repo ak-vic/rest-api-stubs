@@ -1,4 +1,4 @@
-const logger = require('../logger');
+const logger = require('../logger/logger');
 const controllers = require('../controllers');
 const Services = require('../services');
 
@@ -57,7 +57,6 @@ function openApiRouter() {
         await apiController[controllerOperation](request, response, next);
       }
     } catch (error) {
-      console.error(error);
       const err = { code: 500, error: error.message };
       handleError(err, request, response, next);
     }

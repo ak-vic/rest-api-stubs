@@ -1,2 +1,3 @@
 /Node.js/openapi-generator-client/.env
 /Node.js/openapi-generator/.env
+/Node.js/openapi-generator-client/*.log
