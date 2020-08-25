@@ -17,7 +17,14 @@ const logger = createLogger({
 function logRequest(req, res, msg = "", level = "info") {
   const xRequestId = res.getHeader("x-request-id");
   const xCorrelationId = res.getHeader("x-correlation-id");
-  const logMessage = { requestId: xRequestId, correlationId: xCorrelationId, method: req.method, url: req.url };
+  const logMessage = { 
+    requestId: xRequestId, 
+    correlationId: xCorrelationId,
+    method: req.method, 
+    url: req.url,
+    requestHeaders: req.headers,
+    responseHeaders: res.getHeaders()
+  };
   if(msg){
     if (level === "error") {
       logMessage.error = msg;

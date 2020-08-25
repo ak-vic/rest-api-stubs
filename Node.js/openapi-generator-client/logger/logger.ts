@@ -18,7 +18,14 @@ export const logger = createLogger({
 export function logRequest(req: Request, res: Response, msg: string = "", level: string = "info") {
   const xRequestId = res.getHeader("x-request-id") as string;
   const xCorrelationId = res.getHeader("x-correlation-id") as string;
-  const logMessage: any = { requestId: xRequestId, correlationId: xCorrelationId, method: req.method, url: req.url };
+  const logMessage: any = { 
+    requestId: xRequestId, 
+    correlationId: xCorrelationId, 
+    method: req.method, 
+    url: req.url,
+    requestHeaders: req.headers,
+    responseHeaders: res.getHeaders()
+  };
   if(msg){
     if (level === "error") {
       logMessage.error = msg;
