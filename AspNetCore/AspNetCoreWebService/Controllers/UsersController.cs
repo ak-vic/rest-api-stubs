@@ -26,12 +26,14 @@ namespace AspNetCoreWebService.Controllers
             this.userService = userService;
         }
 
+        /// <summary>Create a user</summary>
         public async override Task<ActionResult<User>> Create([FromBody] User user)
         {
             user.Id = 9999;
             return CreatedAtAction(nameof(Get), new { id = 9999 }, user);
         }
 
+        /// <summary>Delete user</summary>
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async override Task<IActionResult> Delete(int id)
@@ -44,11 +46,13 @@ namespace AspNetCoreWebService.Controllers
             return NoContent();
         }
 
+        /// <summary>Get all users</summary>
         public async override Task<ActionResult<List<User>>> Get()
         {
             return await Task.FromResult(userService.GetUsers());
         }
 
+        /// <summary>Get user by id</summary>
         public async override Task<ActionResult<User>> GetById(int id)
         {
             var user = userService.GetUser(id);
@@ -59,6 +63,7 @@ namespace AspNetCoreWebService.Controllers
             return user;
         }
 
+        /// <summary>Get user by name</summary>
         public async override Task<ActionResult<User>> GetByName([BindRequired] string name)
         {
             var user = userService.GetUser(name);
@@ -69,6 +74,7 @@ namespace AspNetCoreWebService.Controllers
             return user;
         }
 
+        /// <summary>Update user</summary>
         public async override Task<IActionResult> Update(int id, [FromBody] User user)
         {
             if (id != user.Id)

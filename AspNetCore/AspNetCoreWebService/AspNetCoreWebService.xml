@@ -4,6 +4,24 @@
         <name>AspNetCoreWebService</name>
     </assembly>
     <members>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Create(AspNetCoreWebService.Models.User)">
+            <summary>Create a user</summary>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Delete(System.Int32)">
+            <summary>Delete user</summary>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Get">
+            <summary>Get all users</summary>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.GetById(System.Int32)">
+            <summary>Get user by id</summary>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.GetByName(System.String)">
+            <summary>Get user by name</summary>
+        </member>
+        <member name="M:AspNetCoreWebService.Controllers.UsersController.Update(System.Int32,AspNetCoreWebService.Models.User)">
+            <summary>Update user</summary>
+        </member>
         <member name="M:AspNetCoreWebService.Controllers.UsersControllerBase.Get">
             <summary>Get all users</summary>
             <returns>Success</returns>

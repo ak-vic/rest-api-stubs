@@ -24,6 +24,7 @@ namespace AspNetCoreClient.Controllers
             this.remoteService = remoteService;
         }
 
+        /// <summary>Get all users</summary>
         [HttpGet, Route("users")]
         public async Task<ActionResult<List<User>>> Get()
         {
@@ -42,6 +43,7 @@ namespace AspNetCoreClient.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>Get user by id</summary>
         [HttpGet, Route("users/{id}")]
         public async Task<ActionResult<User>> GetById(int id)
         {
@@ -60,6 +62,7 @@ namespace AspNetCoreClient.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>Get user by name</summary>
         [HttpGet, Route("users/name/{name}")]
         public async Task<ActionResult<User>> GetByName(string name)
         {
@@ -78,6 +81,7 @@ namespace AspNetCoreClient.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>Create a user</summary>
         [HttpPost, Route("users")]
         public async Task<ActionResult<User>> Create(User user)
         {
@@ -97,6 +101,7 @@ namespace AspNetCoreClient.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>Update user</summary>
         [HttpPut, Route("users/{id}")]
         public async Task<ActionResult<User>> Update(int id, User user)
         {
@@ -118,6 +123,7 @@ namespace AspNetCoreClient.Controllers
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
+        /// <summary>Delete user</summary>
         [HttpDelete, Route("users/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

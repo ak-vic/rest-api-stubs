@@ -4,6 +4,24 @@
         <name>AspNetCoreClient</name>
     </assembly>
     <members>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.Get">
+            <summary>Get all users</summary>
+        </member>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.GetById(System.Int32)">
+            <summary>Get user by id</summary>
+        </member>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.GetByName(System.String)">
+            <summary>Get user by name</summary>
+        </member>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.Create(AspNetCoreClient.Models.User)">
+            <summary>Create a user</summary>
+        </member>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.Update(System.Int32,AspNetCoreClient.Models.User)">
+            <summary>Update user</summary>
+        </member>
+        <member name="M:AspNetCoreClient.Controllers.UsersProxyController.Delete(System.Int32)">
+            <summary>Delete user</summary>
+        </member>
         <member name="M:AspNetCoreClient.Services.RemoteService.GetAsync">
             <summary>Get all users</summary>
             <returns>Success</returns>
